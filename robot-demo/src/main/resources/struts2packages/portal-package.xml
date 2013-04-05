@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- struts 2.0 package for portal package-->
+    <package namespace="/" name="portal-package" extends="project-default">
+        <!-- portal actions -->
+        <action name="*" class="org.mvnsearch.wx.web.controllers.PortalController" method="{1}">
+            <result name="index" type="dispatcher">/WEB-INF/pages/welcome.jsp</result>
+            <result name="weixin" type="dispatcher">/WEB-INF/pages/weixin.jspx</result>
+        </action>
+    </package>
+</struts>
