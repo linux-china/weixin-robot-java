@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.mvnsearch.wx</groupId>
+    <artifactId>weixin-robot</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <modules>
+        <module>robot-sdk</module>
+        <module>robot-demo</module>
+    </modules>
+    <name>Weixin Robot Java Project</name>
+    <description>
+        微信公共平台自动回复机器人Java SDK
+    </description>
+    <inceptionYear>2013</inceptionYear>
+    <organization>
+        <name>MvnSearch</name>
+        <url>http://www.mvnsearch.org</url>
+    </organization>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <developers>
+        <developer>
+            <id>linux_china</id>
+            <name>Jacky Chan</name>
+            <email>libing.chen@gmail.com</email>
+            <url>http://weibo.com/linux2china</url>
+            <roles>
+                <role>开发人员</role>
+            </roles>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git@github.com:linux-china/weixin-robot-java.git</connection>
+        <developerConnection>scm:git@github.com:linux-china/weixin-robot-java.git</developerConnection>
+        <url>https://github.com/linux-china/weixin-robot-java</url>
+    </scm>
+    <dependencies>
+        <!-- unit test-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
