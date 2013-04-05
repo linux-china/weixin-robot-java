@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<weixinrobot>
+
+    <rule>
+        <type>text</type>
+        <content>[\d]{11}</content>
+        <forward>/weixin2.wx</forward>
+    </rule>
+
+    <rule>
+        <type>text</type>
+        <forward>/weixin.wx</forward>
+    </rule>
+
+</weixinrobot>
