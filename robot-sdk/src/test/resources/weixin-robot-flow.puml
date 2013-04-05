@@ -1,0 +1,13 @@
+@startdot
+digraph WeixRobotFlow {
+  WeixinServer [style=rounded]
+  WeixinRobotServlet [shape=box]
+  WebFramework [shape=box]
+  MessageRouter [shape=diamond]
+
+  WeixinServer -> WeixinRobotServlet [style=bold,label="Message Post"];
+  WeixinRobotServlet -> MessageRouter [label="Regex Router"]
+  MessageRouter -> WebFramework [label="Forward"]
+  WebFramework -> WeixinServer [label="Response"]
+}
+@enddot
