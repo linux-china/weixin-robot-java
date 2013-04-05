@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<weixinrobot>
+
+    <rule>
+        <type>text</type>
+        <content>^\d{13}$</content>
+        <forward>/weixin.wx</forward>
+    </rule>
+
+</weixinrobot>
