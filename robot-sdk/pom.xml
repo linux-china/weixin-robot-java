@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.mvnsearch.wx</groupId>
+    <artifactId>wx-robot-sdk</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <name>Weixin Robot Java SDK</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <developers>
+        <developer>
+            <id>linux_china</id>
+            <name>Jacky Chan</name>
+            <email>libing.chen@gmail.com</email>
+            <url>http://weibo.com/linux2china</url>
+            <roles>
+                <role>开发人员</role>
+            </roles>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git@github.com:linux-china/weixin-robot-java.git</connection>
+        <developerConnection>scm:git@github.com:linux-china/weixin-robot-java.git</developerConnection>
+        <url>https://github.com/linux-china/weixin-robot-java</url>
+    </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jdom</groupId>
+            <artifactId>jdom</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>annotations</artifactId>
+            <version>12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
