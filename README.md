@@ -85,5 +85,8 @@ Weixin robot Java
 * 在代码中获取解析好的微信消息  WeixinMessage wxMsg = (WeixinMessage)request.getAttribute("wxMsg");
 
 ### FAQ
-样例请访问rboto-demo web app
+
+* 如何调试： 由于微信服务器只能通知互联网IP和80端口，开发时你可以在你家中的ADSL拨号路由器上设置一下80转发，
+然后微信服务器的消息通知就可以路由到你的笔记本上，方便你测试和开发。查看你的互联网Ip请访问 http://ip.mvnsearch.org
+* 参考样例清访问robot-demo Maven module
 
