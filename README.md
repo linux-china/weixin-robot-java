@@ -80,6 +80,10 @@ Weixin robot Java
          <FuncFlag>0</FuncFlag>
      </xml>
 
+### 编码
+
+* 在代码中获取解析好的微信消息  WeixinMessage wxMsg = (WeixinMessage)request.getAttribute("wxMsg");
+
 ### FAQ
 样例请访问rboto-demo web app
 
