@@ -19,11 +19,11 @@ public class WeixinMessage {
      */
     private String id;
     /**
-     * sender
+     * sender，微信号
      */
     private String sender;
     /**
-     * receiver
+     * receiver，微信号
      */
     private String receiver;
     /**
