@@ -27,7 +27,7 @@ public class WeixinMessage {
      */
     private String receiver;
     /**
-     * created time from 1970, unit is second
+     * created timestamp
      */
     private Date createdTime;
     /**
