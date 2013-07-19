@@ -6,6 +6,7 @@ import org.jdom.input.SAXBuilder;
 
 import java.io.InputStream;
 import java.io.StringReader;
+import java.util.Date;
 
 /**
  * weixin message
@@ -28,7 +29,7 @@ public class WeixinMessage {
     /**
      * created time from 1970, unit is second
      */
-    private Long createdTime;
+    private Date createdTime;
     /**
      * type: text, image, location, link
      */
@@ -62,11 +63,11 @@ public class WeixinMessage {
         this.receiver = receiver;
     }
 
-    public Long getCreatedTime() {
+    public Date getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Long createdTime) {
+    public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
     }
 
@@ -128,7 +129,7 @@ public class WeixinMessage {
         msg.content = rootElement.getChildTextTrim("Content");
         String createTime = rootElement.getChildTextTrim("CreateTime");
         if (createTime != null) {
-            msg.createdTime = Long.valueOf(createTime);
+            msg.createdTime = new Date(Long.valueOf(createTime) * 1000);
         }
         //event message
         if ("event".equals(msg.type)) {
