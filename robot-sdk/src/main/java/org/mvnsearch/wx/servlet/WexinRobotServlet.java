@@ -25,6 +25,9 @@ public class WexinRobotServlet extends HttpServlet {
      * token
      */
     private String token;
+    /**
+     * url rewriter
+     */
     private UrlRewriter urlRewriter;
 
     /**
@@ -78,6 +81,8 @@ public class WexinRobotServlet extends HttpServlet {
         if (valid) {
             try {
                 WeixinMessage wxMsg = WeixinMessage.parseXML(request.getInputStream());
+                WeixinMessageContext.setWeixinMessage(wxMsg);
+                WeixinMessageContext.setQueryString(request.getQueryString());
                 response.setContentType("text/xml; charset=UTF-8");
                 request.setAttribute("wxMsg", wxMsg);
                 RewrittenUrl rewrittenUrl = urlRewriter.processRequest(wxMsg, request, response);
@@ -86,6 +91,8 @@ public class WexinRobotServlet extends HttpServlet {
                 }
             } catch (Exception e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            } finally {
+                WeixinMessageContext.clear();
             }
         }
     }
