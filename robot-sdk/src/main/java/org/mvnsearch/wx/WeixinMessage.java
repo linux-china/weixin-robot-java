@@ -130,6 +130,13 @@ public class WeixinMessage {
         if (createTime != null) {
             msg.createdTime = Long.valueOf(createTime);
         }
+        //event message
+        if ("event".equals(msg.type)) {
+            String event = rootElement.getChildText("EventKey");
+            String eventKey = rootElement.getChildText("EventKey");
+            msg.type = event;
+            msg.content = eventKey;
+        }
         return msg;
     }
 
