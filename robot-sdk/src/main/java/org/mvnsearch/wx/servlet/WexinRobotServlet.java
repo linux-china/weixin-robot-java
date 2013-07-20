@@ -137,6 +137,27 @@ public class WexinRobotServlet extends HttpServlet {
     }
 
     /**
+     * get query   from query string
+     *
+     * @param request http servlet request
+     * @return query object
+     */
+    protected Map<String, String> getQuery(HttpServletRequest request) {
+        String queryString = request.getQueryString();
+        if (queryString == null || !queryString.contains("=")) {
+            return Collections.emptyMap();
+        }
+        Map<String, String> query = new HashMap<String, String>();
+        for (String pair : queryString.split("&")) {
+            String[] parts = pair.split("=", 2);
+            if (parts.length == 2 && !parts[1].isEmpty()) {
+                query.put(parts[0], parts[1]);
+            }
+        }
+        return query;
+    }
+
+    /**
      * send 400(bad request) response
      *
      * @param response response
