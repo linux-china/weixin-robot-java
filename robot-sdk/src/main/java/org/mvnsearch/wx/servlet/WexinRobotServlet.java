@@ -2,6 +2,7 @@ package org.mvnsearch.wx.servlet;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.mvnsearch.wx.WeixinMessage;
+import org.mvnsearch.wx.WeixinUtils;
 import org.mvnsearch.wx.rewrite.Conf;
 import org.mvnsearch.wx.rewrite.RewrittenUrl;
 import org.mvnsearch.wx.rewrite.UrlRewriter;
@@ -80,7 +81,7 @@ public class WexinRobotServlet extends HttpServlet {
         boolean valid = checkSignature(request.getQueryString(), token);
         if (valid) {
             try {
-                WeixinMessage wxMsg = WeixinMessage.parseXML(request.getInputStream());
+                WeixinMessage wxMsg = WeixinUtils.parseXML(request.getInputStream());
                 WeixinMessageContext.setWeixinMessage(wxMsg);
                 WeixinMessageContext.setQueryString(request.getQueryString());
                 response.setContentType("text/xml; charset=UTF-8");
