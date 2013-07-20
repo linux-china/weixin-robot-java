@@ -28,6 +28,10 @@ public class WexinRobotServlet extends HttpServlet {
      */
     private String token;
     /**
+     * pass code，用于调试，不执行签名检查
+     */
+    private String passCode;
+    /**
      * url rewriter
      */
     private UrlRewriter urlRewriter;
@@ -40,6 +44,7 @@ public class WexinRobotServlet extends HttpServlet {
      */
     public void init(ServletConfig config) throws ServletException {
         this.token = config.getInitParameter("token");
+        this.passCode = config.getInitParameter("passCode");
         String confFile = config.getInitParameter("confFile");
         try {
             Conf conf = new Conf(config.getServletContext(), confFile);
@@ -120,7 +125,9 @@ public class WexinRobotServlet extends HttpServlet {
      * @return valid mark
      */
     public boolean checkSignature(String queryString, @Nullable String token) {
-        if (token == null || token.isEmpty()) return false;
+        if (token == null || token.isEmpty() || queryString == null) return false;
+        //pass code check
+        if (passCode != null || queryString.contains(passCode)) return true;
         Map<String, String> params = new HashMap<String, String>();
         for (String pair : queryString.split("&")) {
             String[] temp = pair.split("=", 2);
