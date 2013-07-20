@@ -23,7 +23,7 @@ public class WeixinMessageTest extends TestCase {
                 "<Content><![CDATA[再发]]></Content>\n" +
                 "<MsgId>5862944037781496076</MsgId>\n" +
                 "</xml>";
-        WeixinMessage msg = WeixinMessage.parseXML(msgXml);
+        WeixinMessage msg = WeixinUtils.parseXML(msgXml);
         System.out.println(msg.getResponseXml("text", "我能帮助你什么？"));
     }
 }
