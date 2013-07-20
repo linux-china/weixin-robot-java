@@ -1,5 +1,7 @@
 package org.mvnsearch.wx;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Date;
 
 /**
@@ -138,6 +140,7 @@ public class WeixinMessage {
      *
      * @return reply message
      */
+    @NotNull
     public WeixinMessage getReply() {
         WeixinMessage reply = new WeixinMessage();
         reply.setReceiver(this.sender);
