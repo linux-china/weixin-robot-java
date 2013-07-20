@@ -1,6 +1,7 @@
 package org.mvnsearch.wx.servlet;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.jetbrains.annotations.Nullable;
 import org.mvnsearch.wx.WeixinMessage;
 import org.mvnsearch.wx.WeixinUtils;
 import org.mvnsearch.wx.rewrite.Conf;
@@ -60,7 +61,7 @@ public class WexinRobotServlet extends HttpServlet {
         String echostr = request.getParameter("echostr");
         response.setContentType("text/plain; charset=UTF-8");
         PrintWriter out = response.getWriter();
-        if (checkSignature(request.getQueryString(), token)) {
+        if (checkSignature(request.getQueryString(), getToken())) {
             out.print(echostr);
         } else {
             out.print("false");
@@ -78,7 +79,7 @@ public class WexinRobotServlet extends HttpServlet {
      */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //validate signature
-        boolean valid = checkSignature(request.getQueryString(), token);
+        boolean valid = checkSignature(request.getQueryString(), getToken());
         if (valid) {
             try {
                 WeixinMessage wxMsg = WeixinUtils.parseXML(request.getInputStream());
@@ -95,6 +96,8 @@ public class WexinRobotServlet extends HttpServlet {
             } finally {
                 WeixinMessageContext.clear();
             }
+        } else {
+            send400(response);
         }
     }
 
@@ -104,7 +107,8 @@ public class WexinRobotServlet extends HttpServlet {
      * @param queryString query string
      * @return valid mark
      */
-    public boolean checkSignature(String queryString, String token) {
+    public boolean checkSignature(String queryString, @Nullable String token) {
+        if (token == null || token.isEmpty()) return false;
         Map<String, String> params = new HashMap<String, String>();
         for (String pair : queryString.split("&")) {
             String[] temp = pair.split("=", 2);
@@ -120,5 +124,28 @@ public class WexinRobotServlet extends HttpServlet {
             seed.append(link);
         }
         return DigestUtils.sha1Hex(seed.toString()).equals(params.get("signature"));
+    }
+
+    /**
+     * get weixin call back token
+     *
+     * @return token
+     */
+    @Nullable
+    protected String getToken() {
+        return this.token;
+    }
+
+    /**
+     * send 400(bad request) response
+     *
+     * @param response response
+     */
+    public void send400(HttpServletResponse response) {
+        try {
+            response.sendError(400);
+        } catch (Exception ignore) {
+
+        }
     }
 }
