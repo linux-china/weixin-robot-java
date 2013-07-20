@@ -1,11 +1,5 @@
 package org.mvnsearch.wx;
 
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.input.SAXBuilder;
-
-import java.io.InputStream;
-import java.io.StringReader;
 import java.util.Date;
 
 /**
@@ -14,6 +8,43 @@ import java.util.Date;
  * @author linux_china
  */
 public class WeixinMessage {
+    /**
+     * text message
+     */
+    public static final String type_text = "txt";
+    /**
+     * image message
+     */
+    public static final String type_image = "image";
+    /**
+     * location message
+     */
+    public static final String type_location = "location";
+    /**
+     * link message
+     */
+    public static final String type_link = "link";
+    /**
+     * news message
+     */
+    public static final String type_news = "news";
+    /**
+     * music message
+     */
+    public static final String type_music = "music";
+
+    /**
+     * subscribe message
+     */
+    public static final String type_subscribe = "subscribe";
+    /**
+     * unsubscribe message
+     */
+    public static final String type_unsubscribe = "unsubscribe";
+    /**
+     * click message
+     */
+    public static final String type_click = "click";
     /**
      * message id
      */
@@ -71,6 +102,10 @@ public class WeixinMessage {
         this.createdTime = createdTime;
     }
 
+    public Long getCreatedSeconds() {
+        return this.createdTime.getTime() / 1000;
+    }
+
     public String getType() {
         return type;
     }
@@ -88,59 +123,28 @@ public class WeixinMessage {
     }
 
     /**
-     * parse xml to get weixin message
+     * fill message
      *
-     * @param xmlText xml text
-     * @return weixin message
-     * @throws Exception exception
+     * @param type    type
+     * @param content content
      */
-    public static WeixinMessage parseXML(String xmlText) throws Exception {
-        SAXBuilder saxBuilder = new SAXBuilder();
-        Document document = saxBuilder.build(new StringReader(xmlText));
-        return constructMsg(document);
+    public void fill(String type, String content) {
+        this.type = type;
+        this.content = content;
     }
 
     /**
-     * parse xml to get weixin message
+     * get reply message
      *
-     * @param inputStream xml text
-     * @return weixin message
-     * @throws Exception exception
+     * @return reply message
      */
-    public static WeixinMessage parseXML(InputStream inputStream) throws Exception {
-        SAXBuilder saxBuilder = new SAXBuilder();
-        Document document = saxBuilder.build(inputStream);
-        return constructMsg(document);
+    public WeixinMessage getReply() {
+        WeixinMessage reply = new WeixinMessage();
+        reply.setReceiver(this.sender);
+        reply.setSender(this.receiver);
+        reply.setCreatedTime(new Date());
+        return reply;
     }
-
-    /**
-     * construct weixin message from xml document
-     *
-     * @param document xml document
-     * @return weixin message
-     */
-    private static WeixinMessage constructMsg(Document document) {
-        Element rootElement = document.getRootElement();
-        WeixinMessage msg = new WeixinMessage();
-        msg.id = rootElement.getChildTextTrim("MsgId");
-        msg.receiver = rootElement.getChildTextTrim("ToUserName");
-        msg.sender = rootElement.getChildTextTrim("FromUserName");
-        msg.type = rootElement.getChildTextTrim("MsgType");
-        msg.content = rootElement.getChildTextTrim("Content");
-        String createTime = rootElement.getChildTextTrim("CreateTime");
-        if (createTime != null) {
-            msg.createdTime = new Date(Long.valueOf(createTime) * 1000);
-        }
-        //event message
-        if ("event".equals(msg.type)) {
-            String event = rootElement.getChildText("EventKey");
-            String eventKey = rootElement.getChildText("EventKey");
-            msg.type = event;
-            msg.content = eventKey;
-        }
-        return msg;
-    }
-
 
     /**
      * get response xml
