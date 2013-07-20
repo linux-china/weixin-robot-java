@@ -5,6 +5,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.mvnsearch.wx.WeixinMessage;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 /**
  * portal controller
@@ -47,7 +48,7 @@ public class PortalController extends ActionSupport implements ServletRequestAwa
             wxMsg.setSender("jacky");
             wxMsg.setReceiver("leijuan");
             wxMsg.setContent("txt");
-            wxMsg.setCreatedTime(System.currentTimeMillis() / 1000);
+            wxMsg.setCreatedTime(new Date());
             request.setAttribute("wxMsg", wxMsg);
         }
         request.setAttribute("content", "echo：" + wxMsg.getContent());
