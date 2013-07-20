@@ -83,14 +83,7 @@ public class WexinRobotServlet extends HttpServlet {
         if (valid) {
             try {
                 WeixinMessage wxMsg = WeixinUtils.parseXML(request.getInputStream());
-                WeixinMessageContext.setWeixinMessage(wxMsg);
-                WeixinMessageContext.setQueryString(request.getQueryString());
-                response.setContentType("text/xml; charset=UTF-8");
-                request.setAttribute("wxMsg", wxMsg);
-                RewrittenUrl rewrittenUrl = urlRewriter.processRequest(wxMsg, request, response);
-                if (rewrittenUrl != null) {
-                    rewrittenUrl.doRewrite(request, response);
-                }
+                doMessage(wxMsg, request, response);
             } catch (Exception e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             } finally {
@@ -98,6 +91,25 @@ public class WexinRobotServlet extends HttpServlet {
             }
         } else {
             send400(response);
+        }
+    }
+
+    /**
+     * 处理 weixin message
+     *
+     * @param wxMsg    weixin message
+     * @param request  http servlet request
+     * @param response http servlet response
+     * @throws Exception exception
+     */
+    public void doMessage(WeixinMessage wxMsg, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        WeixinMessageContext.setWeixinMessage(wxMsg);
+        WeixinMessageContext.setQueryString(request.getQueryString());
+        response.setContentType("text/xml; charset=UTF-8");
+        request.setAttribute("wxMsg", wxMsg);
+        RewrittenUrl rewrittenUrl = urlRewriter.processRequest(wxMsg, request, response);
+        if (rewrittenUrl != null) {
+            rewrittenUrl.doRewrite(request, response);
         }
     }
 
