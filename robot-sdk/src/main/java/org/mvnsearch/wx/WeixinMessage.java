@@ -13,7 +13,7 @@ public class WeixinMessage {
     /**
      * text message
      */
-    public static final String type_text = "txt";
+    public static final String type_text = "text";
     /**
      * image message
      */
