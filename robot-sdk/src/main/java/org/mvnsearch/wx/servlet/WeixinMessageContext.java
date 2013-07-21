@@ -45,6 +45,21 @@ public class WeixinMessageContext {
     }
 
     /**
+     * add query pair
+     *
+     * @param name  name
+     * @param value value
+     */
+    public void addQuery(String name, String value) {
+        Map<String, String> query = (Map<String, String>) threadLocal.get().get("query");
+        if (query == null) {
+            query = new HashMap<String, String>();
+            threadLocal.get().put("query", query);
+        }
+        query.put(name, value);
+    }
+
+    /**
      * get query
      *
      * @return query
