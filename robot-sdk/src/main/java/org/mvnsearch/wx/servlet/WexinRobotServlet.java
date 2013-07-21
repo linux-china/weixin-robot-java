@@ -127,7 +127,7 @@ public class WexinRobotServlet extends HttpServlet {
     public boolean checkSignature(String queryString, @Nullable String token) {
         if (token == null || token.isEmpty() || queryString == null) return false;
         //pass code check
-        if (passCode != null || queryString.contains(passCode)) return true;
+        if (passCode != null && queryString.contains(passCode)) return true;
         Map<String, String> params = new HashMap<String, String>();
         for (String pair : queryString.split("&")) {
             String[] temp = pair.split("=", 2);
