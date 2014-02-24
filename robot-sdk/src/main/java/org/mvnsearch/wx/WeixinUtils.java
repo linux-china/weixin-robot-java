@@ -61,7 +61,7 @@ public class WeixinUtils {
         }
         //event message
         if ("event".equals(msg.getType())) {
-            String event = rootElement.getChildText("EventKey");
+            String event = rootElement.getChildText("Event");
             String eventKey = rootElement.getChildText("EventKey");
             msg.setType(event);
             msg.setContent(eventKey);
